@@ -15,7 +15,9 @@ class MetadataModelFactory:
             except ValueError:
                 return ValueError
 
-            return MetadataModel(data['name'], data['description'], data['properties'], data['tags'], file)
+            return MetadataModel(
+                data['name'], data['description'], data['properties'], data['tags'], file
+            )
 
         else:
             return MetadataModel('', '', dict(), [], None)

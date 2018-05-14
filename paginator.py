@@ -64,6 +64,4 @@ class Paginator:
         self._finished = val
 
 
-class DefaultPaginator(Paginator):
-    limit = 100
-    offset = 0
+DefaultPaginator = Paginator(100, 0)

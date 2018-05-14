@@ -13,7 +13,7 @@ class Paginator:
     # we want to pass the parameters to the API by default and use an iterator
     # to access multiple pages.
     #
-    def __init__(self, limit=100, offset=0):
+    def __init__(self, limit, offset):
         self._limit = limit
         self._offset = offset
         self._finished = False
@@ -62,3 +62,8 @@ class Paginator:
     @finished.setter
     def finished(self, val):
         self._finished = val
+
+
+class DefaultPaginator(Paginator):
+    limit = 100
+    offset = 0

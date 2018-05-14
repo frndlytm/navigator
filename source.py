@@ -23,18 +23,28 @@ class SourceType(Enum):
     CLUSTER = 13
 
 
-class Source:
-    def __init__(self, clustername, sourceurl, port, version, endpoint):
-        assert endpoint in ['entities', 'relations', 'sources']
+
+class SourceFactory:
+    def __init__(self, clustername, host, port):
         self.clustername = clustername
-        self.sourceurl = sourceurl
+        self.host = host
         self.port = port
-        self.version = version
+
+    def make(self, endpoint):
+        return Source(self.clustername, self.host, self.port, endpoint)
+
+
+
+class Source:
+    def __init__(self, clustername, host, port, endpoint):
+        self.clustername = clustername
+        self.host = host
+        self.port = port
         self.endpoint = endpoint
 
     def __repr__(self):
-        return 'https://{}.{}:{}/api/v{}/{}'.format(
-            self.clustername, self.sourceurl, self.port, self.version, self.endpoint
+        return 'https://{}.{}:{}/api/{}'.format(
+            self.clustername, self.host, self.port, self.endpoint
         )
 
     def get(self, params):

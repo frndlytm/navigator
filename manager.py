@@ -4,7 +4,7 @@
 @description:
     A manager consumes all of the factories and builds their results on concrete metadata.
 """
-from paginator import Paginator
+from .paginator import Paginator
 
 class Manager:
     def __init__(self):

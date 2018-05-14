@@ -4,24 +4,8 @@
 @description:
     Exposes the cluster by managing metadata and generating requests.
 """
-from enum import Enum
 import requests
-
-class SourceType(Enum):
-    NONE = 1
-    MAPREDUCE = 2
-    YARN = 3
-    HDFS = 4
-    HIVE = 5
-    PIG = 6
-    IMPALA = 7
-    OOZIE = 8
-    SDK = 9
-    SQOOP = 10
-    SPARK = 11
-    S3 = 12
-    CLUSTER = 13
-
+from paginator import DefaultPaginator
 
 
 class SourceFactory:
@@ -30,17 +14,18 @@ class SourceFactory:
         self.host = host
         self.port = port
 
-    def make(self, endpoint):
-        return Source(self.clustername, self.host, self.port, endpoint)
+    def make(self, endpoint, paginator=DefaultPaginator()):
+        return Source(self.clustername, self.host, self.port, endpoint, paginator)
 
 
 
 class Source:
-    def __init__(self, clustername, host, port, endpoint):
+    def __init__(self, clustername, host, port, endpoint, paginator):
         self.clustername = clustername
         self.host = host
         self.port = port
         self.endpoint = endpoint
+        self.paginator = paginator
 
     def __repr__(self):
         return 'https://{}.{}:{}/api/{}'.format(

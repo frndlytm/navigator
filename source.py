@@ -12,18 +12,19 @@ class SourceFactory:
         self.host = host
         self.port = port
 
-    def make(self, version, endpoint):
-        return Source(self.clustername, self.host, self.port, version, endpoint)
+    def make(self, version, endpoint, handler):
+        return Source(self.clustername, self.host, self.port, version, endpoint, handler)
 
 
 
 class Source:
-    def __init__(self, clustername, host, port, version, endpoint):
+    def __init__(self, clustername, host, port, version, endpoint, handler):
         self.clustername = clustername
         self.host = host
         self.port = port
         self.version = version
         self.endpoint = endpoint
+        self.handler = handler
 
     def __repr__(self):
         if self.version:
@@ -35,9 +36,11 @@ class Source:
                 self.clustername, self.host, self.port, self.endpoint
             )
 
+    def _query(self, params):
+        return self.handler.handleParams(params)
+
     def get(self, s=None, params=None):
-        if s:
-            return s.get(self, params=params).json()
-        else:
-            return requests.get(self, params=params).json()
+        url = str(self)+self._query(params)
+        if s: return s.get(url).json()
+        else: return requests.get(url).json()
 

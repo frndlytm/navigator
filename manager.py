@@ -5,6 +5,7 @@
     A manager consumes all of the factories and builds their results on concrete metadata.
 """
 from paginator import Paginator
+import handler
 
 class Manager:
     def __init__(self):
@@ -49,7 +50,7 @@ class Manager:
 
     def setup(self):
         # Add the source for endpoint lookup.
-        src = self.factory.make(None, self.docs[0])
+        src = self.factory.make(None, self.docs[0], handler.NoneRuleHandler())
         self.add_source(src)
 
         # For endpoint in the endpoint lookup, add the source.

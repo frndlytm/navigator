@@ -13,6 +13,7 @@ class Main:
         self.manager = Manager()
         self.manager.docs = self.config.docs
         self.manager.session = self.config.session
+        self.manager.paginator = DefaultPaginator
         self.manager.factory = SourceFactory(
             self.config.name, self.config.host, self.config.port
         )
@@ -23,7 +24,7 @@ class Main:
         rules = Path(self.config.path).joinpath('rules')
         valids = [item.stem for item in rules.iterdir()]
         srcs = filter(lambda src: src.endpoint in valids, self.manager.sources)
-        for src in srcs: print(src)
+        for src in srcs: print(src+str(self.manager.paginator))
 
 
 if __name__ == '__main__':

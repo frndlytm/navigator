@@ -1,3 +1,7 @@
-[
-    {"query": "queryText:*", "ids": null}
-]
+{
+    "endpoint": "entities",
+    "handler":"EntityRuleHandler()",
+    "rules": [
+        {"query": "queryText:*", "ids": null}
+    ]
+}

@@ -1,3 +1,7 @@
-[
-    {"startTime":1522555200000, "endTime":1526400000000, "query":["service==hive","command==QUERY"]}
-]
+{
+    "endpoint": "audits",
+    "handler":"AuditRuleHandler()",
+    "rules": [
+        {"startTime":1522555200000, "endTime":1526400000000, "query":["service==hive","command==QUERY"]}
+    ]
+}

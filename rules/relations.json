@@ -1,3 +1,7 @@
-[
-    {"entityIds":null, "types":null, "roles":null}
-]
+{
+    "endpoint": "relations",
+    "handler":"RelationRuleHandler()",
+    "rules": [
+        {"entityIds":null, "types":null, "roles":null}
+    ]
+}

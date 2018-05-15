@@ -1,4 +1,5 @@
 import logging
+from pathlib import Path
 
 from manager import Manager
 from source import SourceFactory
@@ -19,8 +20,10 @@ class Main:
 
 
     def __call__(self):
-        for src in self.manager.sources:
-            print(src)
+        rules = Path(self.config.path).joinpath('rules')
+        valids = [item.stem for item in rules.iterdir()]
+        srcs = filter(lambda src: src.endpoint in valids, self.manager.sources)
+        for src in srcs: print(src)
 
 
 if __name__ == '__main__':

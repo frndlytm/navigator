@@ -21,7 +21,7 @@ class NoneRuleHandler(RuleHandler):
 
 
 class AuditRuleHandler(RuleHandler):
-    class AuditParams:
+    class AuditRule:
         def __init__(self, start, end, query):
             self.start = start
             self.end = end
@@ -48,5 +48,23 @@ class AuditRuleHandler(RuleHandler):
 
     def handleParams(self, params):
         if self.checkParams(params):
-            audit = AuditParams(params['startTime'], params['endTime'], params['query'])
+            audit = self.AuditRule(params['startTime'], params['endTime'], params['query'])
             return str(audit)
+
+
+class InteractiveRuleHandler(RuleHandler):
+    class InteractiveRule:
+        def __init__(self, query):
+            self.query = query
+        def __str__(self):
+            return ';'.join(
+                ['{}:{}'.format(key, value) for key, value in self.query]
+            )
+
+    def checkParams(self, params):
+        return True
+
+    def handleParams(self, params):
+        if self.checkParams(params):
+            interactive = self.InteractiveRule(params['query'])
+            return 'query={}'.format(str(interactive))

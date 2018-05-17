@@ -1,5 +1,5 @@
 """
-@author: cdimare@granitenet.com
+@author: frndlytm
 @name: navigator.source
 @description:
     Exposes the cluster by managing metadata and generating requests.

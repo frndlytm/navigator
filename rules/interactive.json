@@ -1,0 +1,9 @@
+[
+    {
+        "endpoint": "entities",
+        "handler":"InteractiveRuleHandler(EntityRuleHandler)",
+        "rules": [
+            {"query":[{"sourceType":"impala"}]}
+        ]
+    }
+]

@@ -1,5 +1,5 @@
 """
-@author: cdimare@granitenet.com
+@author: frndlytm
 @name: navigator.taggers
 
 @description:
